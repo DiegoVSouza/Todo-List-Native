@@ -3,11 +3,20 @@ import { StyleSheet } from 'react-native'
 export const styles = StyleSheet.create({
     container: {
         width: '100%',
-        backgroundColor: '#1F1E25',
-        borderRadius: 5,
+        backgroundColor: '#262626',
+        borderRadius: 8,
         flexDirection: 'row',
         alignItems: 'center',
-        marginBottom: 10
+        marginBottom: 10,
+        borderWidth: 2,
+        borderColor: '#333333'
+
+    },
+    checkBox: {
+        borderRadius: 15,
+        marginLeft: 15,
+        height: 19,
+        width: 19,
     },
     name: {
         color: '#FFF',
@@ -23,7 +32,6 @@ export const styles = StyleSheet.create({
         width: 56,
         height: 56,
         borderRadius: 5,
-        backgroundColor: '#E23C44',
         alignItems: 'center',
         justifyContent: 'center',
     }

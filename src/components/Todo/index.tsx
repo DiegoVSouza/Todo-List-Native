@@ -1,4 +1,4 @@
-import { Text, View, TouchableOpacity, } from 'react-native'
+import { Text, View, TouchableOpacity, Image } from 'react-native'
 import { styles } from './styles'
 import Checkbox from 'expo-checkbox';
 
@@ -12,10 +12,10 @@ export function Todo({ text, onRemove, checked, setChecked }: TodoProps) {
 
     return (
         <View style={styles.container}>
-            <Checkbox value={checked} onValueChange={setChecked} />
+            <Checkbox style={styles.checkBox} color={checked ? '#5E60CE' : '#4EA8DE'} value={checked} onValueChange={setChecked} />
             <Text style={checked ? styles.name : styles.name}>{text}</Text>
             <TouchableOpacity style={styles.button} onPress={onRemove} >
-                <Text style={styles.buttonText}>-</Text>
+                <Image source={require('../../../assets/trash.png')} />
             </TouchableOpacity>
         </View>
     )

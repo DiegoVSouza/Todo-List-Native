@@ -4,6 +4,8 @@ import { Todo } from '../../components/Todo'
 import { styles } from './styles'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import SVG from 'react-native-svg';
+
 interface Todo {
     id: string;
     text: string;
@@ -71,38 +73,52 @@ export function Home() {
     }
 
 
+
     return (
         <View style={styles.container}>
-            <Text style={styles.eventName}>Nome do Evento</Text>
-            <Text style={styles.eventDate}>Sexta, 4 de novembro de 2022</Text>
+            <View style={styles.header}>
+                <Image source={require('../../../assets/Logo.png')} />
+            </View>
+            <View style={styles.content}>
 
-            <View style={styles.form}>
-                <TextInput style={styles.input} placeholder='Nome do participante'
-                    placeholderTextColor="#6B6B6B"
-                    onChangeText={setText}
-                    value={text}
-                />
-                <TouchableOpacity style={styles.button} onPress={handleParticipantAdd}>
-                    <Text style={styles.buttonText}>+</Text>
-                </TouchableOpacity>
-            </View>
-            <View>
-                <Text style={styles.eventName}>Criadas<View><Text style={styles.eventName}>{todos.length}</Text></View></Text>
-                <Text style={styles.eventName}>Concluídas<View><Text style={styles.eventName}>{checkeds.length}</Text></View></Text>
-            </View>
-            {isLoading ? <ActivityIndicator /> : <FlatList data={todos} keyExtractor={item => item.id} renderItem={({ item }) => (
-                <Todo key={item.id} text={item.text} checked={verifyChecked(item.id)} onRemove={() => handleParticipantRemove(item.id)} setChecked={() => handleChecked(item.id)} />
-            )}
-                showsVerticalScrollIndicator={false}
-                ListEmptyComponent={() => (
-                    <View>
-                        {/* <Image source={ } /> */}
-                        <Text style={styles.listEmpthyText}> Ninguem chegou no evento ainda, adicione os participantes a sua lista de presença</Text>
+                <View style={styles.form}>
+                    <TextInput style={styles.input} placeholder='Nome do participante'
+                        placeholderTextColor="#6B6B6B"
+                        onChangeText={setText}
+                        value={text}
+                    />
+                    <TouchableOpacity style={styles.button} onPress={handleParticipantAdd}>
+                        <Image source={require('../../../assets/plus.png')} />
+                    </TouchableOpacity>
+                </View>
+
+                <View style={styles.info}>
+                    <View style={styles.infoContent}>
+                        <Text style={styles.created}>Criadas</Text>
+                        <View style={styles.infoNumber}><Text style={styles.number}>{todos.length}</Text></View>
+                    </View>
+                    <View style={styles.infoContent}>
+                        <Text style={styles.concluded}>Concluídas</Text>
+                        <View style={styles.infoNumber}><Text style={styles.number}>{checkeds.length}</Text></View>
                     </View>
 
-                )} />}
+                </View>
+
+                {isLoading ? <ActivityIndicator /> : <FlatList data={todos} keyExtractor={item => item.id} renderItem={({ item }) => (
+                    <Todo key={item.id} text={item.text} checked={verifyChecked(item.id)} onRemove={() => handleParticipantRemove(item.id)} setChecked={() => handleChecked(item.id)} />
+                )}
+                    showsVerticalScrollIndicator={false}
+                    ListEmptyComponent={() => (
+                        <View style={styles.todoContent}>
+                            <Image source={require('../../../assets/Clipboard.png')} />
+                            <Text style={styles.listEmpthyText}> Você ainda não tem tarefas cadastradas</Text>
+                            <Text style={styles.listEmpthySubText}> Crie tarefas e organize seus itens a fazer</Text>
+                        </View>
+
+                    )} />}
 
 
+            </View>
 
 
         </View>
